@@ -1,0 +1,626 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <title>School Payment Tracking - Payment History</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+      :root {
+        --primary-color: #0b80ee;
+        --primary-hover-color: #0968c3;
+        --secondary-text-color: #4a5568;
+        --border-color: #e2e8f0;
+        --background-color: #f8fafc;
+        --card-background-color: #ffffff;
+        --table-header-background: #f1f5f9;
+        --text-primary: #1a202c;
+        --text-secondary: #4a5568;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --danger-color: #ef4444;
+        --rejected-color: #71717a;
+        --status-rejected-bg: #e4e4e7;
+        --status-rejected-text: #3f3f46;
+      }
+      .table-hover-row:hover {
+        background-color: var(--background-color);
+        cursor: pointer;
+      }
+      .active-nav-link {
+        color: var(--primary-color);
+        font-weight: 600;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.25rem;
+      }
+      .nav-link:hover {
+        color: var(--primary-color);
+      }
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      .status-completed {
+        background-color: #d1fae5;
+        color: #065f46;
+      }
+      .status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+      .status-rejected {
+        background-color: var(--status-rejected-bg);
+        color: var(--status-rejected-text);
+      }
+      .filter-button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        border: 1px solid var(--border-color);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        background-color: var(--card-background-color);
+        transition: all 0.2s ease-in-out;
+      }
+      .filter-button:hover {
+        background-color: #f3f4f6;
+        border-color: #d1d5db;
+      }
+      .filter-button.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+      .filter-button.active:hover {
+        background-color: var(--primary-hover-color);
+        border-color: var(--primary-hover-color);
+      }
+
+      /* Show More Button Styles */
+      .show-more-button {
+        @apply inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2 transition-colors;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[var(--background-color)]"
+    style="font-family: Inter, 'Noto Sans', sans-serif"
+  >
+    <div
+      class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-[var(--card-background-color)] px-6 md:px-10 py-4 shadow-sm"
+        >
+          <div class="flex items-center gap-3 text-[var(--text-primary)]">
+            <div class="size-8 text-[var(--primary-color)]">
+              <svg
+                class="w-8 h-8"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 2L3 7v10l9 5 9-5V7L12 2zm0 2.37L18.92 8 12 11.64 5.08 8 12 4.37zM5 15.91V9.08l7 3.89v6.83l-7-3.89zm14 0l-7 3.89v-6.83l7-3.89v6.83z"
+                ></path>
+              </svg>
+            </div>
+            <h2
+              class="text-[var(--text-primary)] text-xl font-semibold leading-tight tracking-tight"
+            >
+              SchoolPay
+            </h2>
+          </div>
+          <div class="flex items-center gap-6">
+            <nav class="hidden md:flex items-center gap-6">
+              <a
+                class="nav-link text-[var(--text-secondary)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors"
+                href="Treasurer-Dashboard.html"
+                >Dashboard</a
+              >
+              <a
+                class="nav-link text-[var(--text-secondary)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors"
+                href="Treasurer-pending-payments.html"
+                >Pending Payments</a
+              >
+              <a
+                class="nav-link text-[var(--primary-color)] text-sm font-semibold leading-normal active-nav-link"
+                href="Historical-Payments.html"
+                >Historical Payments</a
+              >
+              <a
+                class="nav-link text-[var(--text-secondary)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors"
+                href="#"
+                >Settings</a
+              >
+            </nav>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--primary-color)]"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHh3orRot87eceSYiLgnx2CIk0CoBoJV2oucnvyI31EhMibAs9xD9cnzTX7MVBTmfR2AxC-78X4zJ1zaau3p1Q219H6qIkRwYFJF7xJyOVvlOKCMNr675ffUjdlfxat2gcKjZeABmsEq0Jw2_oFZG0QX9ef6tceIoNY0lKH7JsYk1nj6nN8xrrAnEjjDk5ioRbc5kdFB8qCqvm4V6ePZ3IDmT9vuOSO6SeqfW-kqkTcNn5rAT3BbYY4XY1ZzP124XhACXboOc-Sps');
+              "
+            ></div>
+          </div>
+        </header>
+        <main
+          class="px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 flex flex-1 justify-center py-10"
+        >
+          <div
+            class="layout-content-container flex flex-col w-full max-w-7xl flex-1"
+          >
+            <div
+              class="flex flex-wrap items-center justify-between gap-4 mb-6 px-1"
+            >
+              <h1
+                class="text-[var(--text-primary)] text-2xl sm:text-3xl font-bold leading-tight tracking-tight"
+              >
+                Payment History
+              </h1>
+              <div class="flex items-center gap-3">
+                <div class="relative">
+                  <input
+                    class="pl-10 pr-4 py-2.5 border border-[var(--border-color)] rounded-lg text-sm focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] transition-shadow w-full sm:w-64"
+                    placeholder="Search by Parent Name"
+                    type="text"
+                    id="parentNameSearch"
+                  />
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <svg
+                      class="w-5 h-5 text-[var(--text-secondary)]"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <button
+                  class="flex items-center gap-2 bg-[var(--primary-color)] hover:bg-[var(--primary-hover-color)] text-white text-sm font-medium px-4 py-2.5 rounded-lg shadow-sm transition-colors"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 4.5v15m7.5-7.5h-15"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                  New Payment
+                </button>
+              </div>
+            </div>
+            <div class="mb-6 px-1">
+              <div class="flex flex-wrap items-center gap-4">
+                <select
+                  id="gradeFilter"
+                  class="filter-dropdown px-4 py-2.5 border border-[var(--border-color)] rounded-lg text-sm focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]"
+                >
+                  <option value="">All Grades</option>
+                  <option value="1">Grade 1</option>
+                  <option value="2">Grade 2</option>
+                  <option value="3">Grade 3</option>
+                  <option value="4">Grade 4</option>
+                  <option value="5">Grade 5</option>
+                  <option value="6">Grade 6</option>
+                </select>
+                <div class="flex items-center gap-2">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox h-5 w-5 text-[var(--primary-color)] rounded"
+                      id="rejectedCheckbox"
+                      value="rejected"
+                    />
+                    <span class="ml-2 text-[var(--text-secondary)]"
+                      >Rejected</span
+                    >
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox h-5 w-5 text-[var(--primary-color)] rounded"
+                      id="partiallyPaidCheckbox"
+                      value="partial"
+                    />
+                    <span class="ml-2 text-[var(--text-secondary)]"
+                      >Partially Paid</span
+                    >
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox h-5 w-5 text-[var(--primary-color)] rounded"
+                      id="completedCheckbox"
+                      value="completed"
+                    />
+                    <span class="ml-2 text-[var(--text-secondary)]"
+                      >Completed</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-[var(--card-background-color)] shadow-xl rounded-xl overflow-hidden @container"
+            >
+              <div class="overflow-x-auto">
+                <table class="w-full min-w-[800px]" id="paymentTable">
+                  <thead class="bg-[var(--table-header-background)]">
+                    <tr>
+                      <th
+                        class="table-col-date px-6 py-4 text-left text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider"
+                      >
+                        Payment Date
+                      </th>
+                      <th
+                        class="table-col-parent px-6 py-4 text-left text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider"
+                      >
+                        Parent Name
+                      </th>
+                      <th
+                        class="table-col-children px-6 py-4 text-left text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider"
+                      >
+                        Children
+                      </th>
+                      <th
+                        class="table-col-amount px-6 py-4 text-left text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider"
+                      >
+                        Total Amount
+                      </th>
+                      <th
+                        class="table-col-status px-6 py-4 text-left text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="table-col-details px-6 py-4 text-left text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider w-36"
+                      ></th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-[var(--border-color)]" id="paymentTableBody">
+                    <!-- Payment rows will be inserted here by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                @container (max-width: 900px) {
+                  .table-col-children {
+                    display: none;
+                  }
+                }
+                @container (max-width: 768px) {
+                  .table-col-status {
+                    display: none;
+                  }
+                }
+                @container (max-width: 640px) {
+                  .table-col-amount {
+                    display: none;
+                  }
+                  .min-w-\[800px\] {
+                    min-width: auto;
+                  }
+                }
+                @container (max-width: 480px) {
+                  .table-col-date {
+                    display: none;
+                  }
+                  .table-col-parent {
+                    font-size: 0.875rem;
+                  }
+                  th,
+                  td {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                  }
+                  .px-6 {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                  }
+                }
+              </style>
+            </div>
+            <div
+              class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 px-1"
+            >
+              <span class="text-sm text-[var(--text-secondary)]">
+                Showing
+                <span class="font-medium text-[var(--text-primary)]" id="displayedCount"></span> of
+                <span class="font-medium text-[var(--text-primary)]" id="totalFilteredCount"></span>
+                results
+              </span>
+              <button id="showMoreButton" class="show-more-button hidden">
+                Show More
+              </button>
+            </div>
+          </div>
+        </main>
+        <footer
+          class="py-8 text-center text-sm text-[var(--text-secondary)] border-t border-[var(--border-color)] bg-[var(--card-background-color)]"
+        >
+          © 2024 SchoolPay. All rights reserved.
+        </footer>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initial payment data from the HTML, converted to JS objects
+        const initialPaymentData = [
+          {
+            paymentDate: "2023-10-26",
+            parentName: "Sophia Clark",
+            children: "Liam Clark, Olivia Clark",
+            totalAmount: 25.00,
+            status: "completed",
+            grade: "5",
+          },
+          {
+            paymentDate: "2023-11-01",
+            parentName: "John Doe",
+            children: "Emily Doe",
+            totalAmount: 15.00,
+            status: "pending",
+            grade: "3",
+          },
+          {
+            paymentDate: "2023-10-20",
+            parentName: "Jane Smith",
+            children: "Daniel Smith",
+            totalAmount: 10.00,
+            status: "partial",
+            grade: "4",
+          },
+          {
+            paymentDate: "2023-09-10",
+            parentName: "Robert Brown",
+            children: "Sarah Brown",
+            totalAmount: 28.00,
+            status: "rejected",
+            grade: "2",
+          },
+          {
+            paymentDate: "2023-11-05",
+            parentName: "Chris Green",
+            children: "Alex Green",
+            totalAmount: 5.00,
+            status: "rejected",
+            grade: "1",
+          },
+          {
+            paymentDate: "2023-10-15",
+            parentName: "Jessica White",
+            children: "Laura White",
+            totalAmount: 20.00,
+            status: "rejected",
+            grade: "5",
+          },
+          {
+            paymentDate: "2023-11-08",
+            parentName: "David Lee",
+            children: "Kevin Lee",
+            totalAmount: 12.00,
+            status: "completed",
+            grade: "3",
+          },
+          {
+            paymentDate: "2023-11-10",
+            parentName: "Sarah Chen",
+            children: "Jason Chen",
+            totalAmount: 8.00,
+            status: "pending",
+            grade: "4",
+          },
+          {
+            paymentDate: "2023-09-20",
+            parentName: "Michael Wang",
+            children: "Lily Wang",
+            totalAmount: 22.00,
+            status: "rejected",
+            grade: "2",
+          },
+          {
+            paymentDate: "2023-10-01",
+            parentName: "Emily Johnson",
+            children: "Oliver Johnson",
+            totalAmount: 18.00,
+            status: "completed",
+            grade: "1",
+          },
+        ];
+
+        // Function to generate a random integer within a range
+        function getRandomInt(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Function to generate a random date within the last 60 days
+        function getRandomDate() {
+          const today = new Date();
+          const pastDate = new Date(today.setDate(today.getDate() - getRandomInt(1, 60)));
+          return pastDate.toISOString().split('T')[0];
+        }
+
+        // Generate 15 more random demo payments
+        const additionalPayments = [];
+        const studentFirstNames = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy", "Kevin", "Linda", "Mike", "Nancy", "Oscar"];
+        const studentLastNames = ["Smith", "Jones", "Williams", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin"];
+        const parentFirstNames = ["James", "Mary", "Robert", "Patricia", "John", "Jennifer", "Michael", "Linda", "William", "Elizabeth", "David", "Susan", "Richard", "Jessica", "Joseph"];
+        const parentLastNames = ["Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas"];
+        const grades = ["1", "2", "3", "4", "5", "6"];
+        const statuses = ["completed", "pending", "rejected", "partial"];
+
+        for (let i = 0; i < 15; i++) {
+          const totalAmount = getRandomInt(10, 29); // Amounts less than MYR 30
+          const status = statuses[getRandomInt(0, statuses.length - 1)];
+          
+          const numChildren = getRandomInt(1, 2); // 1 or 2 children
+          let childrenNames = [];
+          for (let j = 0; j < numChildren; j++) {
+            childrenNames.push(`${studentFirstNames[getRandomInt(0, studentFirstNames.length - 1)]} ${studentLastNames[getRandomInt(0, studentLastNames.length - 1)]}`);
+          }
+
+          additionalPayments.push({
+            paymentDate: getRandomDate(),
+            parentName: `${parentFirstNames[getRandomInt(0, parentFirstNames.length - 1)]} ${parentLastNames[getRandomInt(0, parentLastNames.length - 1)]}`,
+            children: childrenNames.join(', '),
+            totalAmount: totalAmount,
+            status: status,
+            grade: grades[getRandomInt(0, grades.length - 1)],
+          });
+        }
+
+        let allPaymentData = [...initialPaymentData, ...additionalPayments];
+        let filteredPaymentData = [];
+        let isFullTableDisplayed = false; // New state variable
+
+        const paymentTableBody = document.getElementById("paymentTableBody");
+        const gradeFilter = document.getElementById("gradeFilter");
+        const rejectedCheckbox = document.getElementById("rejectedCheckbox");
+        const partiallyPaidCheckbox = document.getElementById("partiallyPaidCheckbox");
+        const completedCheckbox = document.getElementById("completedCheckbox");
+        const parentNameSearch = document.getElementById("parentNameSearch");
+        const showMoreButton = document.getElementById("showMoreButton");
+        const displayedCountSpan = document.getElementById("displayedCount");
+        const totalFilteredCountSpan = document.getElementById("totalFilteredCount");
+
+        function filterAndRenderPayments() {
+          const selectedGrade = gradeFilter.value;
+          const filterStatuses = [];
+          if (rejectedCheckbox.checked) filterStatuses.push("rejected");
+          if (partiallyPaidCheckbox.checked) filterStatuses.push("partial");
+          if (completedCheckbox.checked) filterStatuses.push("completed");
+          const searchTerm = parentNameSearch.value.toLowerCase();
+
+          filteredPaymentData = allPaymentData.filter((payment) => {
+            const rowParentName = payment.parentName.toLowerCase();
+            const rowGrade = payment.grade;
+            const rowStatus = payment.status;
+
+            const gradeMatch =
+              selectedGrade === "" || rowGrade === selectedGrade;
+            const statusMatch =
+              filterStatuses.length === 0 || filterStatuses.includes(rowStatus);
+            const parentNameMatch = rowParentName.includes(searchTerm);
+
+            return gradeMatch && statusMatch && parentNameMatch;
+          });
+
+          isFullTableDisplayed = false; // Reset to show limited view on new filter
+          renderTable();
+        }
+
+        function renderTable() {
+          paymentTableBody.innerHTML = ""; // Clear existing rows
+
+          const paymentsToDisplay = isFullTableDisplayed
+            ? filteredPaymentData
+            : filteredPaymentData.slice(0, 5); // Show only first 5 if not full table
+
+          paymentsToDisplay.forEach((payment) => {
+            const row = document.createElement("tr");
+            row.className = "table-hover-row payment-row";
+            row.dataset.parent = payment.parentName;
+            row.dataset.grade = payment.grade;
+            row.dataset.status = payment.status;
+
+            let statusClass = "";
+            let statusText = "";
+            if (payment.status === "completed") {
+              statusClass = "status-completed";
+              statusText = "Completed";
+            } else if (payment.status === "pending") {
+              statusClass = "status-pending";
+              statusText = "Pending";
+            } else if (payment.status === "partial") {
+              statusClass = "status-pending";
+              statusText = "Partially Paid";
+            } else if (payment.status === "rejected") {
+              statusClass = "status-rejected";
+              statusText = "Rejected";
+            }
+
+            row.innerHTML = `
+              <td class="table-col-date px-6 py-4 whitespace-nowrap text-sm font-medium text-[var(--text-primary)]">
+                ${payment.paymentDate}
+              </td>
+              <td class="table-col-parent px-6 py-4 whitespace-nowrap text-sm text-[var(--text-secondary)]">
+                ${payment.parentName}
+              </td>
+              <td class="table-col-children px-6 py-4 whitespace-nowrap text-sm text-[var(--text-secondary)]">
+                ${payment.children}
+              </td>
+              <td class="table-col-amount px-6 py-4 whitespace-nowrap text-sm text-[var(--text-primary)]">
+                MYR ${payment.totalAmount.toFixed(2)}
+              </td>
+              <td class="table-col-status px-6 py-4 whitespace-nowrap">
+                <span class="status-badge ${statusClass}">${statusText}</span>
+              </td>
+              <td class="table-col-actions px-6 py-4 whitespace-nowrap text-right">
+                <a
+                  class="text-[var(--primary-color)] hover:text-[var(--primary-hover-color)] text-sm font-medium"
+                  href="Treasurer-Payment-Details.html"
+                  >View Details</a
+                >
+              </td>
+            `;
+            paymentTableBody.appendChild(row);
+          });
+
+          // Update "Showing X of Y results" text
+          const totalFilteredResults = filteredPaymentData.length;
+          const currentDisplayedCount = paymentsToDisplay.length;
+          displayedCountSpan.textContent = currentDisplayedCount;
+          totalFilteredCountSpan.textContent = totalFilteredResults;
+
+          // Manage "Show More" button visibility
+          if (totalFilteredResults > 5 && !isFullTableDisplayed) {
+            showMoreButton.classList.remove("hidden");
+          } else {
+            showMoreButton.classList.add("hidden");
+          }
+        }
+
+        // Event listeners for filters
+        gradeFilter.addEventListener("change", filterAndRenderPayments);
+        rejectedCheckbox.addEventListener("change", filterAndRenderPayments);
+        partiallyPaidCheckbox.addEventListener("change", filterAndRenderPayments);
+        completedCheckbox.addEventListener("change", filterAndRenderPayments);
+        parentNameSearch.addEventListener("input", filterAndRenderPayments);
+
+        // Event listener for "Show More" button
+        showMoreButton.addEventListener("click", () => {
+          isFullTableDisplayed = true;
+          renderTable();
+        });
+
+        // Initial render
+        filterAndRenderPayments();
+      });
+    </script>
+  </body>
+</html>

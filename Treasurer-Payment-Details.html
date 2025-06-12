@@ -1,0 +1,336 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Stitch Design</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+      :root {
+        --primary-color: #0b80ee;
+        --secondary-color: #e7edf4;
+        --text-primary: #0d151c;
+        --text-secondary: #49749c;
+        --border-color: #cedce8;
+        --background-color: #f8fafc;
+      }
+      .nav-link-active {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 4px;
+      }
+      .payment-proof-thumbnail {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+      }
+      .payment-proof-thumbnail:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[var(--background-color)]"
+    style="font-family: Inter, 'Noto Sans', sans-serif"
+  >
+    <div
+      class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] px-10 py-4 shadow-sm"
+        >
+          <div class="flex items-center gap-3 text-[var(--text-primary)]">
+            <div class="size-7 text-[var(--primary-color)]">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_6_319)">
+                  <path
+                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_319">
+                    <rect fill="white" height="48" width="48"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h1
+              class="text-[var(--text-primary)] text-xl font-bold tracking-tight"
+            >
+              SchoolPay
+            </h1>
+          </div>
+          <nav class="flex flex-1 justify-center items-center gap-8">
+            <a
+              class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors"
+              href="#"
+              >Dashboard</a
+            >
+            <a
+              class="text-[var(--text-primary)] nav-link-active text-sm font-semibold leading-normal"
+              href="#"
+              >Payments</a
+            >
+            <a
+              class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors"
+              href="#"
+              >Reports</a
+            >
+            <a
+              class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors"
+              href="#"
+              >Settings</a
+            >
+          </nav>
+          <div class="flex items-center gap-4">
+            <button
+              class="relative text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors"
+            >
+              <span class="material-icons">notifications</span>
+              <span class="absolute top-0 right-0 flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary-color)] opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary-color)]"
+                ></span>
+              </span>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--primary-color)]"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAr3mHqvP2JI_5H5c0_JRH1bWX15yJdHooZj3PsuVNMgT6uHtWfiEcy-rKS-xMj6btcO6g8uWh-LhYwQUvH7yMlOfzY_XZtb9F38rFDOiigBOTakDo9IxDmmnYvKHtgm3hPnMVsC-Dw7Y8cBWO3snCUJ0fsMvJxdGTJase5iPwCsKn-psYb5drOaCDF9vFoEZx2oB5RHWTXWlLy5W75LwrDi1VdWRFDZREZ7ErwXf0gYxOoI6LcqqhpxRwkXHn-4yAeyTjK2RN9rgI');
+              "
+            ></div>
+          </div>
+        </header>
+        <main class="px-10 md:px-20 lg:px-40 flex flex-1 justify-center py-8">
+          <div
+            class="layout-content-container flex flex-col max-w-5xl flex-1 gap-6"
+          >
+            <div
+              class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 p-4 bg-white rounded-lg shadow-sm border border-[var(--border-color)]"
+            >
+              <div>
+                <h2
+                  class="text-[var(--text-primary)] text-2xl font-semibold leading-tight"
+                >
+                  Pending Payment Details
+                </h2>
+                <p
+                  class="text-[var(--text-secondary)] text-sm font-normal leading-normal mt-1"
+                >
+                  Review and approve or reject the payment details submitted by
+                  the parent.
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 text-sm text-[var(--text-secondary)]"
+              >
+                <span class="material-icons text-base">calendar_today</span>
+                <span>Date Submitted: Oct 26, 2023</span>
+              </div>
+            </div>
+            <section
+              class="bg-white rounded-lg shadow-sm border border-[var(--border-color)] p-6"
+            >
+              <h3
+                class="text-[var(--text-primary)] text-xl font-semibold leading-tight tracking-tight mb-4 flex items-center gap-2"
+              >
+                <span class="material-icons text-[var(--primary-color)]"
+                  >person</span
+                >
+                Parent Information
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div class="border-t border-[var(--border-color)] pt-4">
+                  <p
+                    class="text-[var(--text-secondary)] text-xs font-medium leading-normal"
+                  >
+                    Parent Name
+                  </p>
+                  <p
+                    class="text-[var(--text-primary)] text-base font-medium leading-normal mt-1"
+                  >
+                    Sophia Clark
+                  </p>
+                </div>
+                <div class="border-t border-[var(--border-color)] pt-4">
+                  <p
+                    class="text-[var(--text-secondary)] text-xs font-medium leading-normal"
+                  >
+                    Contact Information
+                  </p>
+                  <p
+                    class="text-[var(--text-primary)] text-base font-medium leading-normal mt-1"
+                  >
+                    sophia.clark@email.com
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="bg-white rounded-lg shadow-sm border border-[var(--border-color)] p-6"
+            >
+              <h3
+                class="text-[var(--text-primary)] text-xl font-semibold leading-tight tracking-tight mb-4 flex items-center gap-2"
+              >
+                <span class="material-icons text-[var(--primary-color)]"
+                  >receipt_long</span
+                >
+                Payment Details
+              </h3>
+              <div class="overflow-x-auto @container">
+                <table class="w-full min-w-[700px]">
+                  <thead>
+                    <tr class="border-b border-[var(--border-color)]">
+                      <th
+                        class="px-4 py-3 text-left text-[var(--text-secondary)] text-xs font-medium uppercase tracking-wider"
+                      >
+                        Child's Name
+                      </th>
+                      <th
+                        class="px-4 py-3 text-left text-[var(--text-secondary)] text-xs font-medium uppercase tracking-wider"
+                      >
+                        Paid Amount
+                      </th>
+                      <th
+                        class="px-4 py-3 text-left text-[var(--text-secondary)] text-xs font-medium uppercase tracking-wider"
+                      >
+                        Remaining Amount
+                      </th>
+                      <th
+                        class="px-4 py-3 text-left text-[var(--text-secondary)] text-xs font-medium uppercase tracking-wider"
+                      >
+                        Current Payment
+                      </th>
+                      <th
+                        class="px-4 py-3 text-left text-[var(--text-secondary)] text-xs font-medium uppercase tracking-wider"
+                      >
+                        Payment Proof
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-[var(--border-color)]">
+                    <tr>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-[var(--text-primary)] text-sm font-medium"
+                      >
+                        Liam Clark
+                      </td>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-[var(--text-secondary)] text-sm"
+                      >
+                        $250.00
+                      </td>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-[var(--text-secondary)] text-sm"
+                      >
+                        $0.00
+                      </td>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-green-600 text-sm font-semibold"
+                      >
+                        $250.00
+                      </td>
+                      <td class="px-4 py-4 whitespace-nowrap">
+                        <img
+                          alt="Payment Proof for Liam Clark"
+                          class="payment-proof-thumbnail"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA12A-d5yO8KqdgPr4UmX_SjOf-pHsAfQrWo9CVGT5vfIaO927qdPt2WrOc-Sfsu5oIQ8Lh1JUkeM_j5a_516U7Fo3iVAPj9pkYXAhIoF2nFivuupJDxy8yMQ-bWKBabjbZdoQbHHHuvgOlfr2Jm7PzTE2346ZeO2ccUtre8wVnLaANe0wAnF1Mns6tI5NchgUGiTFx8I95Q5ZtYu1-jqdfQmgV-ujqs3tOeNz1lf172L51r9Z8JRKuHR1JTBTK-PhKcEQ3U-eCzSQ"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-[var(--text-primary)] text-sm font-medium"
+                      >
+                        Olivia Clark
+                      </td>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-[var(--text-secondary)] text-sm"
+                      >
+                        $250.00
+                      </td>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-[var(--text-secondary)] text-sm"
+                      >
+                        $0.00
+                      </td>
+                      <td
+                        class="px-4 py-4 whitespace-nowrap text-green-600 text-sm font-semibold"
+                      >
+                        $250.00
+                      </td>
+                      <td class="px-4 py-4 whitespace-nowrap">
+                        <img
+                          alt="Payment Proof for Olivia Clark"
+                          class="payment-proof-thumbnail"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7qwzV2TO4aUggvOVQ4F6Wjjk_eqCuJIOgLpmKGklXn2OtPM-sgYkc4H07ziRlHg6jGgVk66NWLCZ_uO8An2hNgQ6-S_ToDthNpU5FAsT9ReZ92qXUL24yzTQyD8T9AE8CdMiVqzcMILaOj1uTCfsIy8kROQ8XyRDp7buJDkwcY7ACcv0dfxjZXH0LmQE3OjhzHP9itYF4OMBjOYGsEdOu4c8J6kkCM0pk_3nfBS7l-Us6DJFPGpS2xPblRcb7eap86nzDFa8XGw4"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <section
+              class="bg-white rounded-lg shadow-sm border border-[var(--border-color)] p-6"
+            >
+              <h3
+                class="text-[var(--text-primary)] text-xl font-semibold leading-tight tracking-tight mb-4 flex items-center gap-2"
+              >
+                <span class="material-icons text-[var(--primary-color)]"
+                  >fact_check</span
+                >
+                Actions
+              </h3>
+              <div
+                class="flex flex-col md:flex-row justify-end items-center gap-3"
+              >
+                <button
+                  class="flex w-full md:w-auto items-center justify-center gap-2 rounded-lg h-10 px-6 bg-[var(--secondary-color)] text-[var(--text-primary)] text-sm font-semibold leading-normal tracking-wide hover:bg-slate-200 transition-colors"
+                >
+                  <span class="material-icons text-base">close</span>
+                  <span class="truncate">Reject</span>
+                </button>
+                <button
+                  class="flex w-full md:w-auto items-center justify-center gap-2 rounded-lg h-10 px-6 bg-[var(--primary-color)] text-white text-sm font-semibold leading-normal tracking-wide hover:bg-blue-700 transition-colors"
+                >
+                  <span class="material-icons text-base">check</span>
+                  <span class="truncate">Approve</span>
+                </button>
+              </div>
+            </section>
+          </div>
+        </main>
+        <footer
+          class="border-t border-[var(--border-color)] py-6 px-10 text-center"
+        >
+          <p class="text-xs text-[var(--text-secondary)]">
+            © 2023 SchoolPay. All rights reserved.
+          </p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,251 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <title>SchoolPay - Parent Registration</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+      :root {
+        --primary-color: #0c7ff2;
+        --text-primary: #0d141c;
+        --text-secondary: #49739c;
+        --bg-input: #f0f4f8;
+        --bg-muted: #e7edf4;
+        --border-color: #e0e7f1;
+      }
+      .form-input {
+        @apply flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl border border-transparent text-base font-normal leading-normal text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:border-[var(--primary-color)] focus:outline-0 focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50;
+      }
+      .btn-primary {
+        @apply flex min-w-[84px] items-center justify-center overflow-hidden rounded-xl h-12 px-6 text-base font-semibold leading-normal tracking-tight shadow-sm transition-colors duration-200 ease-in-out;
+        @apply bg-[var(--primary-color)] text-white hover:bg-opacity-90 focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50;
+      }
+      .btn-secondary {
+        @apply flex min-w-[84px] items-center justify-center overflow-hidden rounded-xl h-12 px-6 text-base font-semibold leading-normal tracking-tight transition-colors duration-200 ease-in-out;
+        @apply bg-[var(--bg-muted)] text-[var(--text-primary)] hover:bg-opacity-80 focus:ring-2 focus:ring-[var(--text-primary)] focus:ring-opacity-30;
+      }
+      .form-label {
+        @apply text-[var(--text-primary)] text-sm font-medium leading-normal pb-1.5;
+      }
+    </style>
+  </head>
+  <body style="font-family: Inter, 'Noto Sans', sans-serif">
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] px-6 sm:px-10 py-4"
+        >
+          <div class="flex items-center gap-3 text-[var(--text-primary)]">
+            <div class="size-7 text-[var(--primary-color)]">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_6_319)">
+                  <path
+                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_319">
+                    <rect fill="white" height="48" width="48"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h1
+              class="text-[var(--text-primary)] text-xl font-semibold leading-tight tracking-tight"
+            >
+              SchoolPay
+            </h1>
+          </div>
+        </header>
+        <main class="flex flex-1 justify-center py-8 sm:py-12 px-4 sm:px-6">
+          <div
+            class="layout-content-container flex flex-col w-full max-w-lg py-5 space-y-6"
+          >
+            <h2
+              class="text-[var(--text-primary)] text-3xl font-bold leading-tight tracking-tight text-center"
+            >
+              Parent Registration
+            </h2>
+            <div class="space-y-5 bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+              <div>
+                <label class="form-label" for="icNumber">IC Number</label>
+                <input
+                  class="form-input h-12 p-3.5 bg-[var(--bg-input)]"
+                  id="icNumber"
+                  placeholder="Enter your IC number"
+                  type="text"
+                  value=""
+                />
+              </div>
+              <div>
+                <label class="form-label" for="phoneNumber"
+                  >Parent Phone Number</label
+                >
+                <input
+                  class="form-input h-12 p-3.5 bg-[var(--bg-input)]"
+                  id="phoneNumber"
+                  placeholder="Enter your phone number"
+                  type="tel"
+                  value=""
+                />
+              </div>
+              <div class="border-t border-[var(--border-color)] pt-6">
+                <h3
+                  class="text-[var(--text-primary)] text-xl font-semibold leading-tight tracking-tight mb-4"
+                >
+                  Children's Information
+                </h3>
+                <div class="space-y-6" id="children-container">
+                  <div
+                    class="child-entry space-y-3 border border-[var(--border-color)] p-4 rounded-lg bg-slate-50/50"
+                  >
+                    <div class="flex items-center justify-between">
+                      <p
+                        class="text-sm font-medium text-[var(--text-secondary)]"
+                      >
+                        Child 1
+                      </p>
+                    </div>
+                    <div>
+                      <label class="form-label" for="childName1"
+                        >Child's Name</label
+                      >
+                      <input
+                        class="form-input h-12 p-3.5 bg-white"
+                        id="childName1"
+                        placeholder="Enter child's name"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                    <div>
+                      <label class="form-label" for="grade1">Grade</label>
+                      <select
+                        class="form-input h-12 p-3.5 bg-white appearance-none"
+                        id="grade1"
+                        style="
+                          background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e');
+                          background-repeat: no-repeat;
+                          background-position: right 0.75rem center;
+                          background-size: 1.25em 1.25em;
+                        "
+                      >
+                        <option disabled="" selected="" value="">
+                          Select grade
+                        </option>
+                        <option value="1">Grade 1</option>
+                        <option value="2">Grade 2</option>
+                        <option value="3">Grade 3</option>
+                        <option value="4">Grade 4</option>
+                        <option value="5">Grade 5</option>
+                        <option value="6">Grade 6</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="btn-secondary mt-4 w-full flex items-center justify-center gap-2 hover:bg-slate-200"
+                  id="add-child-btn"
+                  type="button"
+                >
+                  <span class="material-icons-outlined text-lg"
+                    >add_circle_outline</span
+                  >
+                  <span class="truncate">Add Another Child</span>
+                </button>
+              </div>
+              <button class="btn-primary w-full mt-6" type="submit">
+                <span class="truncate">Register</span>
+              </button>
+            </div>
+            <p class="text-center text-sm text-[var(--text-secondary)]">
+              Already have an account?
+              <a
+                class="font-medium text-[var(--primary-color)] hover:underline"
+                href="#"
+                >Log in</a
+              >
+            </p>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script>
+      // Basic script to handle adding more children dynamically.
+      // This is a simplified example and would need more robust implementation for a real application.
+      const childrenContainer = document.getElementById("children-container");
+      const addChildBtn = document.getElementById("add-child-btn");
+      let childCount = 1;
+      addChildBtn.addEventListener("click", () => {
+        childCount++;
+        const newChildEntry = `
+          <div class="child-entry space-y-3 border border-[var(--border-color)] p-4 rounded-lg bg-slate-50/50">
+            <div class="flex items-center justify-between">
+                 <p class="text-sm font-medium text-[var(--text-secondary)]">Child ${childCount}</p>
+                 <button type="button" class="text-red-500 hover:text-red-700 remove-child-btn">
+                    <span class="material-icons-outlined text-xl">remove_circle_outline</span>
+                 </button>
+            </div>
+            <div>
+              <label for="childName${childCount}" class="form-label">Child's Name</label>
+              <input
+                id="childName${childCount}"
+                placeholder="Enter child's name"
+                class="form-input h-12 p-3.5 bg-white"
+                value=""
+                type="text"
+              />
+            </div>
+            <div>
+              <label for="grade${childCount}" class="form-label">Grade</label>
+              <select
+                id="grade${childCount}"
+                class="form-input h-12 p-3.5 bg-white appearance-none"
+                style="background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%236b7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27M6 8l4 4 4-4%27/%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25em 1.25em;"
+              >
+                <option value="" disabled selected>Select grade</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+              </select>
+            </div>
+          </div>
+        `;
+        childrenContainer.insertAdjacentHTML("beforeend", newChildEntry);
+        updateRemoveButtons();
+      });
+      function updateRemoveButtons() {
+        const removeButtons = document.querySelectorAll(".remove-child-btn");
+        removeButtons.forEach((button) => {
+          button.onclick = function () {
+            // Use onclick for simplicity here, or add event listener properly
+            this.closest(".child-entry").remove();
+            // Renumber children if needed - more complex logic omitted for brevity
+          };
+        });
+      }
+      updateRemoveButtons(); // Initial call for any pre-existing remove buttons (though not strictly needed here)
+    </script>
+  </body>
+</html>

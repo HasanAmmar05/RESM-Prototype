@@ -1,0 +1,297 @@
+<html>
+  <head>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <title>Stitch Design</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+      :root {
+        --primary-color: #0c7ff2;
+        --secondary-color: #f8fafc;
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --border-color: #e2e8f0;
+        --accent-color: #38bdf8;
+      }
+      body {
+        font-family: "Inter", "Noto Sans", sans-serif;
+      }
+      .table-header-cell {
+        @apply px-6 py-3 text-left text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider bg-[var(--secondary-color)];
+      }
+      .table-body-cell {
+        @apply px-6 py-4 whitespace-nowrap text-sm text-[var(--text-primary)];
+      }
+      .info-label {
+        @apply text-sm font-medium text-[var(--text-secondary)];
+      }
+      .info-value {
+        @apply text-sm text-[var(--text-primary)] font-semibold;
+      }
+      .status-badge {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+      }
+      .status-completed {
+        @apply bg-green-100 text-green-700;
+      }
+      .status-pending {
+        @apply bg-yellow-100 text-yellow-700;
+      }
+    </style>
+  </head>
+  <body class="bg-[var(--secondary-color)]">
+    <div
+      class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-white px-6 sm:px-10 py-4"
+        >
+          <div class="flex items-center gap-3 text-[var(--text-primary)]">
+            <div class="size-7 text-[var(--primary-color)]">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_6_319)">
+                  <path
+                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_319">
+                    <rect fill="white" height="48" width="48"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h2
+              class="text-[var(--text-primary)] text-xl font-bold leading-tight tracking-[-0.015em]"
+            >
+              SchoolPay
+            </h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-6 sm:gap-8">
+            <nav class="hidden sm:flex items-center gap-6">
+              <a
+                class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal"
+                href="#"
+                >Dashboard</a
+              >
+              <a
+                class="text-[var(--primary-color)] text-sm font-semibold leading-normal border-b-2 border-[var(--primary-color)] pb-1"
+                href="#"
+                >Payments</a
+              >
+              <a
+                class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal"
+                href="#"
+                >Reports</a
+              >
+              <a
+                class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal"
+                href="#"
+                >Support</a
+              >
+            </nav>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--border-color)]"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGhROiERg6_Hp9OyTk3oTSo_eNdIbHeQESeK5nAltV4_ll4XCihMnkoOKxZ-VWYk0Q5LxU6sGKFbF_pkL9wcDVJHtY2_WBPTXiYk7cWUOtQpMd4GCc0k50kYu7O7MJajxckwTARq137JeDTXFx1f7wzHHqg8QzFOHLht0RgCPJAGNAZ45YdBtxzFKdotiGgcFx56i_l-mAiEb8Gd0e_HK2iir2UYpbvz0PSViicDYLy-6Y_fgBwRsE3xxOjjf4xtVo7pZsMijNqBM');
+              "
+            ></div>
+          </div>
+        </header>
+        <main
+          class="px-4 sm:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-8"
+        >
+          <div class="layout-content-container flex flex-col w-full max-w-5xl">
+            <div
+              class="flex flex-wrap justify-between items-center gap-4 p-4 mb-6"
+            >
+              <h1
+                class="text-[var(--text-primary)] text-3xl font-bold leading-tight"
+              >
+                My Children
+              </h1>
+            </div>
+            <section class="mb-10 bg-white p-6 rounded-xl shadow-lg">
+              <div class="flex justify-between items-center mb-6">
+                <h2
+                  class="text-[var(--text-primary)] text-xl font-semibold leading-tight"
+                >
+                  Emily Carter
+                </h2>
+                <span class="info-value text-[var(--primary-color)]"
+                  >Grade 5</span
+                >
+              </div>
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 border-b border-[var(--border-color)] pb-6"
+              >
+                <div>
+                  <p class="info-label">Remaining Tuition Fees</p>
+                  <p class="text-2xl font-bold text-red-600">$500.00</p>
+                </div>
+                <div>
+                  <p class="info-label">Paid So Far</p>
+                  <p class="text-2xl font-bold text-green-600">$800.00</p>
+                </div>
+              </div>
+              <h3
+                class="text-[var(--text-primary)] text-lg font-semibold leading-tight mb-4"
+              >
+                Transaction History
+              </h3>
+              <div
+                class="overflow-x-auto rounded-lg border border-[var(--border-color)]"
+              >
+                <table class="min-w-full divide-y divide-[var(--border-color)]">
+                  <thead>
+                    <tr>
+                      <th class="table-header-cell">Date</th>
+                      <th class="table-header-cell">Description</th>
+                      <th class="table-header-cell text-right">Amount</th>
+                      <th class="table-header-cell text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-[var(--border-color)]">
+                    <tr>
+                      <td class="table-body-cell">2024-07-15</td>
+                      <td class="table-body-cell">Tuition Payment - July</td>
+                      <td class="table-body-cell text-right">-$250.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-completed"
+                          >Completed</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-body-cell">2024-06-15</td>
+                      <td class="table-body-cell">Tuition Payment - June</td>
+                      <td class="table-body-cell text-right">-$250.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-completed"
+                          >Completed</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-body-cell">2024-05-15</td>
+                      <td class="table-body-cell">Activity Fee - Art Club</td>
+                      <td class="table-body-cell text-right">-$50.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-completed"
+                          >Completed</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-body-cell">2024-05-01</td>
+                      <td class="table-body-cell">Tuition Payment - May</td>
+                      <td class="table-body-cell text-right">-$250.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-completed"
+                          >Completed</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <section class="bg-white p-6 rounded-xl shadow-lg">
+              <div class="flex justify-between items-center mb-6">
+                <h2
+                  class="text-[var(--text-primary)] text-xl font-semibold leading-tight"
+                >
+                  Ethan Carter
+                </h2>
+                <span class="info-value text-[var(--primary-color)]"
+                  >Grade 2</span
+                >
+              </div>
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 border-b border-[var(--border-color)] pb-6"
+              >
+                <div>
+                  <p class="info-label">Remaining Tuition Fees</p>
+                  <p class="text-2xl font-bold text-red-600">$750.00</p>
+                </div>
+                <div>
+                  <p class="info-label">Paid So Far</p>
+                  <p class="text-2xl font-bold text-green-600">$500.00</p>
+                </div>
+              </div>
+              <h3
+                class="text-[var(--text-primary)] text-lg font-semibold leading-tight mb-4"
+              >
+                Transaction History
+              </h3>
+              <div
+                class="overflow-x-auto rounded-lg border border-[var(--border-color)]"
+              >
+                <table class="min-w-full divide-y divide-[var(--border-color)]">
+                  <thead>
+                    <tr>
+                      <th class="table-header-cell">Date</th>
+                      <th class="table-header-cell">Description</th>
+                      <th class="table-header-cell text-right">Amount</th>
+                      <th class="table-header-cell text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-[var(--border-color)]">
+                    <tr>
+                      <td class="table-body-cell">2024-07-15</td>
+                      <td class="table-body-cell">Tuition Payment - July</td>
+                      <td class="table-body-cell text-right">-$250.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-completed"
+                          >Completed</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-body-cell">2024-06-15</td>
+                      <td class="table-body-cell">Tuition Payment - June</td>
+                      <td class="table-body-cell text-right">-$250.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-completed"
+                          >Completed</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-body-cell">2024-05-15</td>
+                      <td class="table-body-cell">Tuition Payment - May</td>
+                      <td class="table-body-cell text-right">-$250.00</td>
+                      <td class="table-body-cell text-center">
+                        <span class="status-badge status-pending">Pending</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </main>
+        <footer
+          class="py-6 px-10 text-center border-t border-[var(--border-color)] bg-white"
+        >
+          <p class="text-sm text-[var(--text-secondary)]">
+            © 2024 SchoolPay. All rights reserved.
+          </p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

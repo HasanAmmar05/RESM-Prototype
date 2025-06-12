@@ -1,0 +1,913 @@
+<html>
+  <head>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <title>School Payment Dashboard</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style type="text/tailwindcss">
+      :root {
+        --primary-color: #0c7ff2;
+        --secondary-color: #6b7280;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --danger-color: #ef4444;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-120 {
+        width: 16%;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-240 {
+        width: 10%;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-360 {
+        width: 16%;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-480 {
+        width: 13%;
+        text-align: center;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-550 {
+        width: 15%;
+        text-align: right;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-600 {
+        width: 15%;
+        text-align: right;
+      }
+      .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-720 {
+        width: 15%;
+        text-align: right;
+      }
+      .status-pill {
+        @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium;
+      }
+      .status-full {
+        @apply bg-green-100 text-green-700;
+      }
+      .status-partial {
+        @apply bg-amber-100 text-amber-700;
+      }
+      .status-rejected {
+        @apply bg-red-100 text-red-700; /* Changed from status-unpaid */
+      }
+      .filter-section {
+        @apply bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6;
+      }
+      .filter-row {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+      }
+      .filter-group {
+        @apply flex flex-col gap-2;
+      }
+      .filter-label {
+        @apply text-sm font-medium text-slate-700;
+      }
+      .filter-input {
+        @apply rounded-md border-slate-300 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] sm:text-sm;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-100"
+    style="font-family: Inter, 'Noto Sans', sans-serif"
+  >
+    <div
+      class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 bg-white px-6 py-4 shadow-sm"
+        >
+          <div class="flex items-center gap-3 text-slate-900">
+            <div class="size-7 text-[var(--primary-color)]">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_6_319)">
+                  <path
+                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_319">
+                    <rect fill="white" height="48" width="48"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h2
+              class="text-slate-900 text-xl font-semibold leading-tight tracking-[-0.015em]"
+            >
+              SchoolPay
+            </h2>
+          </div>
+          <div class="flex items-center gap-6">
+            <nav class="flex items-center gap-5">
+              <a
+                class="text-sm font-medium text-[var(--primary-color)] hover:text-[var(--primary-color)] transition-colors"
+                href="Treasurer-Dashboard.html"
+                >Dashboard</a
+              >
+              <a
+                class="text-sm font-medium text-slate-600 hover:text-[var(--primary-color)] transition-colors"
+                href="Treasurer-pending-payments.html"
+                >Pending Payments</a
+              >
+              <a
+                class="text-sm font-medium text-slate-600 hover:text-[var(--primary-color)] transition-colors"
+                href="Historical-Payments.html"
+                >Historical Payments</a
+              >
+              <a
+                class="text-sm font-medium text-slate-600 hover:text-[var(--primary-color)] transition-colors"
+                href="#"
+                >Settings</a
+              >
+            </nav>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-200 hover:border-[var(--primary-color)] transition-all"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlgvJ6ru09JfNrDb-pGs3stW0kmxr5Nj5vbI39oQLm2jSyd-U5wb6ty6RQ3AWVqh0lZzr5QR9ldoNctFv735gwr0Y9jVQI4PSYs-7EFeZ18BjXKPerBqnRbhWinBgfZUcMH5hRlvYqvxNBwSo__y2PLcBDWlpzG1msMEmRxLvnJWRHy4DjHxR1UIYHvyRy22-yh7kmsCVp62DUpEmY2SuO7zzNBJJBcS3Bgpq-rxxjxmylrbowkoQQnarrcPJT33UU10m9_kqxS98');
+              "
+            ></div>
+          </div>
+        </header>
+        <main
+          class="px-6 md:px-10 lg:px-16 xl:px-24 flex flex-1 justify-center py-8"
+        >
+          <div class="layout-content-container flex flex-col w-full max-w-6xl">
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+              <h1 class="text-slate-900 text-3xl font-bold leading-tight">
+                Treasurer Dashboard
+              </h1>
+              <div class="flex items-center gap-4">
+                <button
+                  onclick="toggleFilters()"
+                  class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2"
+                >
+                  <span class="material-icons mr-2">filter_list</span>
+                  Filters
+                </button>
+                <a
+                  href="Treasurer-pending-payments.html"
+                  class="inline-flex items-center justify-center rounded-md bg-[var(--primary-color)] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2 transition-colors duration-150"
+                >
+                  View Pending Payments
+                </a>
+              </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div id="filterSection" class="filter-section hidden">
+              <div class="filter-row">
+                <div class="filter-group">
+                  <label class="filter-label">Date Range</label>
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="date" class="filter-input" id="startDate" />
+                    <input type="date" class="filter-input" id="endDate" />
+                  </div>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Payment Status</label>
+                  <select class="filter-input" id="paymentStatus">
+                    <option value="">All Statuses</option>
+                    <option value="full">Full Payment</option>
+                    <option value="partial">Partial Payment</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Grade Level</label>
+                  <select class="filter-input" id="gradeLevel">
+                    <option value="">All Grades</option>
+                    <option value="1">Grade 1</option>
+                    <option value="2">Grade 2</option>
+                    <option value="3">Grade 3</option>
+                    <option value="4">Grade 4</option>
+                    <option value="5">Grade 5</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label class="filter-label">Amount Range</label>
+                  <div class="grid grid-cols-2 gap-2">
+                    <input
+                      type="number"
+                      class="filter-input"
+                      id="minAmount"
+                      placeholder="Min"
+                    />
+                    <input
+                      type="number"
+                      class="filter-input"
+                      id="maxAmount"
+                      placeholder="Max"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-end gap-4 mt-4">
+                <button
+                  onclick="resetFilters()"
+                  class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2"
+                >
+                  Reset
+                </button>
+                <button
+                  onclick="applyFilters()"
+                  class="inline-flex items-center justify-center rounded-md bg-[var(--primary-color)] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2"
+                >
+                  Apply Filters
+                </button>
+              </div>
+            </div>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+            >
+              <div
+                class="flex flex-col gap-2 rounded-xl p-6 bg-white shadow-sm border border-slate-200"
+              >
+                <div class="flex items-center justify-between">
+                  <p class="text-slate-600 text-sm font-medium">
+                    Total Amount to Receive
+                  </p>
+                  <span class="text-slate-500">
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+                <p
+                  class="text-slate-900 text-3xl font-bold tracking-tight"
+                  data-stat="total-to-receive"
+                >
+                  MYR 0.00
+                </p>
+              </div>
+              <div
+                class="flex flex-col gap-2 rounded-xl p-6 bg-white shadow-sm border border-slate-200"
+              >
+                <div class="flex items-center justify-between">
+                  <p class="text-slate-600 text-sm font-medium">
+                    Total Amount Received
+                  </p>
+                  <span class="text-green-500">
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+                <p
+                  class="text-slate-900 text-3xl font-bold tracking-tight"
+                  data-stat="total-received"
+                >
+                  MYR 0.00
+                </p>
+              </div>
+              <div
+                class="flex flex-col gap-2 rounded-xl p-6 bg-white shadow-sm border border-slate-200"
+              >
+                <div class="flex items-center justify-between">
+                  <p class="text-slate-600 text-sm font-medium">
+                    Partial Payments
+                  </p>
+                  <span class="text-amber-500">
+                    <svg
+                      class="h-5 w-5"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 6v6l4 2"></path>
+                    </svg>
+                  </span>
+                </div>
+                <p
+                  class="text-slate-900 text-3xl font-bold tracking-tight"
+                  data-stat="partial-payments"
+                >
+                  0
+                </p>
+              </div>
+              <div
+                class="flex flex-col gap-2 rounded-xl p-6 bg-white shadow-sm border border-slate-200"
+              >
+                <div class="flex items-center justify-between">
+                  <p class="text-slate-600 text-sm font-medium">
+                    Full Payments
+                  </p>
+                  <span class="text-green-500">
+                    <svg
+                      class="h-5 w-5"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                  </span>
+                </div>
+                <p
+                  class="text-slate-900 text-3xl font-bold tracking-tight"
+                  data-stat="full-payments"
+                >
+                  0
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+            >
+              <div
+                class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6"
+              >
+                <h2 class="text-slate-900 text-xl font-semibold leading-tight">
+                  Student Payment Overview
+                </h2>
+                <div class="relative w-full sm:w-auto">
+                  <div
+                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="h-5 w-5 text-slate-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clip-rule="evenodd"
+                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                        fill-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    class="form-input block w-full sm:w-72 rounded-lg border-slate-300 bg-slate-50 py-2.5 pl-10 pr-3 text-sm text-slate-900 placeholder-slate-400 focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+                    id="parentNameSearch"
+                    placeholder="Search by Parent Name"
+                    type="search"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                <div class="relative w-full sm:w-auto">
+                  <select
+                    class="form-select block w-full sm:w-48 rounded-lg border-slate-300 bg-slate-50 py-2.5 pr-10 text-sm text-slate-900 focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+                    id="classFilter"
+                  >
+                    <option value="">Filter by Class</option>
+                    <option value="Grade 1">Grade 1</option>
+                    <option value="Grade 2">Grade 2</option>
+                    <option value="Grade 3">Grade 3</option>
+                    <option value="Grade 4">Grade 4</option>
+                    <option value="Grade 5">Grade 5</option>
+                    <option value="Grade 6">Grade 6</option>
+                  </select>
+                </div>
+                <div class="flex items-center gap-4">
+                  <label class="flex items-center text-sm text-slate-700">
+                    <input
+                      class="form-checkbox h-4 w-4 text-[var(--primary-color)] border-slate-300 rounded focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+                      id="rejectedFilter"
+                      type="checkbox"
+                    />
+                    <span class="ml-2">Rejected</span>
+                  </label>
+                  <label class="flex items-center text-sm text-slate-700">
+                    <input
+                      class="form-checkbox h-4 w-4 text-[var(--primary-color)] border-slate-300 rounded focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+                      id="partiallyPaidFilter"
+                      type="checkbox"
+                    />
+                    <span class="ml-2">Partially Paid</span>
+                  </label>
+                  <label class="flex items-center text-sm text-slate-700">
+                    <input
+                      class="form-checkbox h-4 w-4 text-[var(--primary-color)] border-slate-300 rounded focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+                      id="completelyPaidFilter"
+                      type="checkbox"
+                    />
+                    <span class="ml-2">Completely Paid</span>
+                  </label>
+                </div>
+              </div>
+              <div class="overflow-x-auto @container">
+                <table class="min-w-full divide-y divide-slate-200">
+                  <thead class="bg-slate-50">
+                    <tr>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-120 px-4 py-3.5 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Student Name
+                      </th>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-240 px-4 py-3.5 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Class
+                      </th>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-360 px-4 py-3.5 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Parent Name
+                      </th>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-480 px-4 py-3.5 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Payment Status
+                      </th>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-550 px-4 py-3.5 text-right text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Total Amount
+                      </th>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-600 px-4 py-3.5 text-right text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Amount Paid
+                      </th>
+                      <th
+                        class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-720 px-4 py-3.5 text-right text-xs font-semibold text-slate-600 uppercase tracking-wider"
+                        scope="col"
+                      >
+                        Remaining Amount
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200 bg-white" id="paymentOverviewTableBody">
+                    <!-- Initial rows will be dynamically generated by JS -->
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                @container (max-width: 768px) {
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-240,
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-360 {
+                    display: none;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-120 {
+                    width: 30%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-480 {
+                    width: 20%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-550 {
+                    width: 25%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-600 {
+                    width: 25%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-720 {
+                    display: none;
+                  }
+                }
+                @container (max-width: 640px) {
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-550 {
+                    display: none;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-120 {
+                    width: 45%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-480 {
+                    width: 25%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-600 {
+                    width: 30%;
+                  }
+                }
+                @container (max-width: 480px) {
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-600 {
+                    display: none;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-120 {
+                    width: 60%;
+                  }
+                  .table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-480 {
+                    width: 40%;
+                  }
+                }
+              </style>
+            </div>
+            <!-- Recent Payments Section -->
+            <div class="bg-white shadow-xl rounded-xl overflow-hidden mb-8">
+              <div class="p-6">
+                <h2
+                  class="text-slate-900 text-xl font-semibold leading-tight tracking-tight mb-4"
+                >
+                  Recent Payments
+                </h2>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider"
+                        >
+                          Student Name
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider"
+                        >
+                          Amount
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                        <th class="relative px-6 py-3">
+                          <span class="sr-only">View Details</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white divide-y divide-slate-200"
+                      id="recentPaymentsTableBody"
+                    >
+                      <!-- Payment rows will be inserted here by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script>
+      // Sample data - In a real application, this would come from a backend
+      const initialPaymentData = [
+        {
+          studentName: "Liam Carter",
+          class: "Grade 5",
+          parentName: "Sophia Carter",
+          totalAmount: 25,
+          amountPaid: 15,
+          remainingAmount: 10,
+          status: "partial",
+          date: "2024-01-15",
+        },
+        {
+          studentName: "Olivia Bennett",
+          class: "Grade 6",
+          parentName: "Ethan Bennett",
+          totalAmount: 25,
+          amountPaid: 25,
+          remainingAmount: 0,
+          status: "full",
+          date: "2024-01-16",
+        },
+        {
+          studentName: "Noah Harper",
+          class: "Grade 5",
+          parentName: "Ava Harper",
+          totalAmount: 25,
+          amountPaid: 25,
+          remainingAmount: 0,
+          status: "full",
+          date: "2024-01-17",
+        },
+        {
+          studentName: "Emma Foster",
+          class: "Grade 6",
+          parentName: "Lucas Foster",
+          totalAmount: 25,
+          amountPaid: 10,
+          remainingAmount: 15,
+          status: "partial",
+          date: "2024-01-18",
+        },
+        {
+          studentName: "Jackson Reed",
+          class: "Grade 5",
+          parentName: "Chloe Reed",
+          totalAmount: 25,
+          amountPaid: 25,
+          remainingAmount: 0,
+          status: "full",
+          date: "2024-01-19",
+        },
+      ];
+
+      // Function to generate a random integer within a range
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Function to generate a random date within the last 30 days
+      function getRandomDate() {
+        const today = new Date();
+        const pastDate = new Date(today.setDate(today.getDate() - getRandomInt(1, 30)));
+        return pastDate.toISOString().split('T')[0];
+      }
+
+      // Generate 15 more random demo payments
+      const additionalPayments = [];
+      const studentNames = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy", "Kevin", "Linda", "Mike", "Nancy", "Oscar"];
+      const parentNames = ["Mr. A", "Mrs. B", "Mr. C", "Mrs. D", "Mr. E", "Mrs. F", "Mr. G", "Mrs. H", "Mr. I", "Mrs. J", "Mr. K", "Mrs. L", "Mr. M", "Mrs. N", "Mr. O"];
+      const grades = ["Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6"];
+      const statuses = ["full", "partial", "rejected"];
+
+      for (let i = 0; i < 15; i++) {
+        const totalAmount = getRandomInt(10, 29); // Amounts less than MYR 30
+        let status = statuses[getRandomInt(0, statuses.length - 1)];
+        let amountPaid;
+        let remainingAmount;
+
+        if (status === "full") {
+          amountPaid = totalAmount;
+          remainingAmount = 0;
+        } else if (status === "partial") {
+          amountPaid = getRandomInt(1, totalAmount - 1);
+          remainingAmount = totalAmount - amountPaid;
+        } else { // rejected
+          amountPaid = 0;
+          remainingAmount = totalAmount;
+        }
+
+        additionalPayments.push({
+          studentName: studentNames[getRandomInt(0, studentNames.length - 1)],
+          class: grades[getRandomInt(0, grades.length - 1)],
+          parentName: parentNames[getRandomInt(0, parentNames.length - 1)],
+          totalAmount: totalAmount,
+          amountPaid: amountPaid,
+          remainingAmount: remainingAmount,
+          status: status,
+          date: getRandomDate(),
+        });
+      }
+
+      const paymentData = [...initialPaymentData, ...additionalPayments];
+
+      function toggleFilters() {
+        const filterSection = document.getElementById("filterSection");
+        filterSection.classList.toggle("hidden");
+      }
+
+      function resetFilters() {
+        document.getElementById("startDate").value = "";
+        document.getElementById("endDate").value = "";
+        document.getElementById("paymentStatus").value = "";
+        document.getElementById("gradeLevel").value = "";
+        document.getElementById("minAmount").value = "";
+        document.getElementById("maxAmount").value = "";
+        document.getElementById("rejectedFilter").checked = false;
+        document.getElementById("partiallyPaidFilter").checked = false;
+        document.getElementById("completelyPaidFilter").checked = false;
+        applyFilters();
+      }
+
+      function applyFilters() {
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+        const statusSelect = document.getElementById("paymentStatus").value;
+        const selectedClassFilter = document.getElementById("classFilter").value; // Main dropdown
+        const selectedGradeLevelFilter = document.getElementById("gradeLevel").value; // Hidden filter section dropdown
+        const minAmount = parseFloat(document.getElementById("minAmount").value);
+        const maxAmount = parseFloat(document.getElementById("maxAmount").value);
+
+        const rejectedChecked = document.getElementById("rejectedFilter").checked;
+        const partiallyPaidChecked = document.getElementById("partiallyPaidFilter").checked;
+        const completelyPaidChecked = document.getElementById("completelyPaidFilter").checked;
+
+        const filteredData = paymentData.filter((payment) => {
+          const dateMatch =
+            (!startDate || payment.date >= startDate) &&
+            (!endDate || payment.date <= endDate);
+          
+          let statusMatch = true;
+          if (statusSelect) {
+            statusMatch = payment.status === statusSelect;
+          } else {
+            const activeFilters = [];
+            if (rejectedChecked) activeFilters.push("rejected");
+            if (partiallyPaidChecked) activeFilters.push("partial");
+            if (completelyPaidChecked) activeFilters.push("full");
+
+            if (activeFilters.length > 0) {
+              statusMatch = activeFilters.includes(payment.status);
+            }
+          }
+
+          // Class/Grade filtering logic
+          let classGradeMatch = true;
+          if (selectedClassFilter) {
+              classGradeMatch = payment.class === selectedClassFilter;
+          } else if (selectedGradeLevelFilter) {
+              classGradeMatch = payment.class === `Grade ${selectedGradeLevelFilter}`;
+          }
+
+          const amountMatch =
+            (isNaN(minAmount) || payment.totalAmount >= minAmount) &&
+            (isNaN(maxAmount) || payment.totalAmount <= maxAmount);
+
+          return dateMatch && statusMatch && classGradeMatch && amountMatch;
+        });
+
+        updateDashboardStats(filteredData);
+        renderPaymentOverview(filteredData);
+        renderRecentPayments(filteredData);
+      }
+
+      function updateDashboardStats(data) {
+        const totalToReceive = data.reduce(
+          (sum, payment) => sum + payment.remainingAmount,
+          0
+        );
+        const totalReceived = data
+          .filter((payment) => payment.status === "full" || payment.status === "partial")
+          .reduce((sum, payment) => sum + payment.amountPaid, 0);
+        const partialPaymentsCount = data.filter(
+          (payment) => payment.status === "partial"
+        ).length;
+        const fullPaymentsCount = data.filter(
+          (payment) => payment.status === "full"
+        ).length;
+
+        document.querySelector(
+          '[data-stat="total-to-receive"]'
+        ).textContent = `MYR ${totalToReceive.toFixed(2)}`;
+        document.querySelector(
+          '[data-stat="total-received"]'
+        ).textContent = `MYR ${totalReceived.toFixed(2)}`;
+        document.querySelector('[data-stat="partial-payments"]').textContent =
+          partialPaymentsCount;
+        document.querySelector('[data-stat="full-payments"]').textContent =
+          fullPaymentsCount;
+      }
+
+      function renderPaymentOverview(data) {
+        const tableBody = document.getElementById("paymentOverviewTableBody");
+        tableBody.innerHTML = "";
+
+        data.forEach((payment) => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-slate-50";
+
+          let statusClass = "";
+          let statusText = "";
+          if (payment.status === "full") {
+            statusClass = "status-full";
+            statusText = "Full";
+          } else if (payment.status === "partial") {
+            statusClass = "status-partial";
+            statusText = "Partial";
+          } else if (payment.status === "rejected") {
+            statusClass = "status-rejected";
+            statusText = "Rejected";
+          }
+
+          row.innerHTML = `
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-120 whitespace-nowrap px-4 py-4 text-sm font-medium text-slate-900">
+              ${payment.studentName}
+            </td>
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-240 whitespace-nowrap px-4 py-4 text-sm text-slate-500">
+              ${payment.class}
+            </td>
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-360 whitespace-nowrap px-4 py-4 text-sm text-slate-500">
+              ${payment.parentName}
+            </td>
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-480 whitespace-nowrap px-4 py-4 text-sm text-slate-500">
+              <span class="status-pill ${statusClass}">${statusText}</span>
+            </td>
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-550 whitespace-nowrap px-4 py-4 text-sm font-medium text-red-600">
+              MYR ${payment.totalAmount.toFixed(2)}
+            </td>
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-600 whitespace-nowrap px-4 py-4 text-sm font-medium text-green-600">
+              MYR ${payment.amountPaid.toFixed(2)}
+            </td>
+            <td class="table-e8c15146-7f1d-4e60-8d3d-2506ef58b70a-column-720 whitespace-nowrap px-4 py-4 text-sm font-medium text-amber-500">
+              MYR ${payment.remainingAmount.toFixed(2)}
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+
+      function renderRecentPayments(data) {
+        const tableBody = document.getElementById("recentPaymentsTableBody");
+        tableBody.innerHTML = "";
+
+        const sortedData = [...data].sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+
+        sortedData.slice(0, 5).forEach((payment) => {
+          let statusClass = "";
+          let statusText = "";
+          if (payment.status === "full") {
+            statusClass = "status-full";
+            statusText = "Full Payment";
+          } else if (payment.status === "partial") {
+            statusClass = "status-partial";
+            statusText = "Partial Payment";
+          } else if (payment.status === "rejected") {
+            statusClass = "status-rejected";
+            statusText = "Rejected";
+          }
+
+          const row = document.createElement("tr");
+          row.className = "hover:bg-slate-50";
+          row.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+              ${payment.studentName}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+              MYR ${payment.totalAmount.toFixed(2)}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+              ${payment.date}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <span class="status-pill ${statusClass}">
+                ${statusText}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <a href="Treasurer-Payment-Details.html" class="text-[var(--primary-color)] hover:text-[var(--primary-color)]">View Details</a>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Event listeners for filters
+      document.getElementById("classFilter").addEventListener("change", applyFilters);
+      document.getElementById("rejectedFilter").addEventListener("change", applyFilters);
+      document.getElementById("partiallyPaidFilter").addEventListener("change", applyFilters);
+      document.getElementById("completelyPaidFilter").addEventListener("change", applyFilters);
+      document.getElementById("parentNameSearch").addEventListener("input", applyFilters);
+      document.getElementById("startDate").addEventListener("change", applyFilters);
+      document.getElementById("endDate").addEventListener("change", applyFilters);
+      document.getElementById("paymentStatus").addEventListener("change", applyFilters);
+      document.getElementById("gradeLevel").addEventListener("change", applyFilters);
+      document.getElementById("minAmount").addEventListener("input", applyFilters);
+      document.getElementById("maxAmount").addEventListener("input", applyFilters);
+
+
+      // Initialize the dashboard with all data
+      document.addEventListener("DOMContentLoaded", () => {
+        applyFilters();
+      });
+    </script>
+  </body>
+</html>
